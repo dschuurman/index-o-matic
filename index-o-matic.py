@@ -7,15 +7,16 @@
 # GNU General Public License for more details.
 #
 # Creates a file of index terms from a PDF manuscript.
-# Input: file listing index terms (plain text) and a manuscript (PDF)
-# Output: a index file (plain text)
-# Requires: pdfgrep command-line tool to be installed.
+# Input: file listing index terms (plaintext) and a manuscript (PDF)
+# Output: a index file (plaintext)
+# Requires: pdfgrep command-line tool needs to be installed.
 
 from subprocess import Popen, PIPE
 
+# Constants
 INDEX_TERMS_FILENAME = 'index-terms.txt'
 OUTPUT_FILENAME = 'index.txt'
-BOOK_PDF_FILENAME = 'book.pdf'
+BOOK_PDF_FILENAME = 'manuscript.pdf'
 PDFGREP = '/opt/homebrew/bin/pdfgrep'
 ENCODING = 'utf-8'
 
