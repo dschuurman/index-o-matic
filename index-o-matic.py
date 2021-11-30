@@ -16,7 +16,7 @@ from subprocess import Popen, PIPE
 # Constants
 INDEX_TERMS_FILENAME = 'index-terms.txt'
 OUTPUT_FILENAME = 'index.txt'
-BOOK_PDF_FILENAME = 'manuscript.pdf'
+MANUSCRIPT_PDF_FILENAME = 'manuscript.pdf'
 PDFGREP = '/opt/homebrew/bin/pdfgrep'
 ENCODING = 'utf-8'
 
@@ -45,14 +45,14 @@ for word in terms_file:
     index_file.write(word + ': ')
 
     # Search for word (without hyphens) by starting pdfgrep process
-    p = Popen([PDFGREP, '-in', '-C 1', word, BOOK_PDF_FILENAME], stdout=PIPE)
+    p = Popen([PDFGREP, '-in', '-C 1', word, MANUSCRIPT_PDF_FILENAME], stdout=PIPE)
     output, errors = p.communicate()
     results = str(output, ENCODING)
 
     # Look for all possible hyphenated versions of the word using regex
     for i in range(1,len(word)-1):
         hyphenated_word = word[0:i] + '-[^a-zA-Z0-9]*' + word[i:]
-        p = Popen([PDFGREP, '-in', '-C 1', hyphenated_word, BOOK_PDF_FILENAME], stdout=PIPE)
+        p = Popen([PDFGREP, '-in', '-C 1', hyphenated_word, MANUSCRIPT_PDF_FILENAME], stdout=PIPE)
         output, errors = p.communicate()
         output = str(output, ENCODING)
         if output != '':
